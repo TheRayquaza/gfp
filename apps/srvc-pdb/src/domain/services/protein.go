@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"time"
 
-	"back/src/data/database"
-	"back/src/data/models"
+	"srvc-pdb/src/data/database"
+	"srvc-pdb/src/data/models"
 )
 
 type ProteinService struct{}

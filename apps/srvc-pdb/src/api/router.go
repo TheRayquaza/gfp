@@ -1,9 +1,9 @@
 package api
 
 import (
-	"log"
-	"back/src/api/controllers"
 	"github.com/gin-gonic/gin"
+	"log"
+	"srvc-pdb/src/api/controllers"
 )
 
 func SetupRouter() *gin.Engine {

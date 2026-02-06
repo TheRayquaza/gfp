@@ -1,4 +1,4 @@
-module back
+module srvc-pdb
 
 go 1.24.6
 

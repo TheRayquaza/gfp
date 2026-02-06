@@ -2,9 +2,9 @@ package main
 
 import (
 	"log"
-	"back/src/api"
-	"back/src/config"
-	"back/src/data/database"
+	"srvc-pdb/src/api"
+	"srvc-pdb/src/config"
+	"srvc-pdb/src/data/database"
 )
 
 func main() {
@@ -17,7 +17,7 @@ func main() {
 	log.Printf("Connected to Redis at %s", cfg.RedisAddr)
 
 	r := api.SetupRouter()
-	
+
 	log.Printf("Server starting on port %s", cfg.ServerPort)
 	if err := r.Run(":" + cfg.ServerPort); err != nil {
 		log.Fatal(err)

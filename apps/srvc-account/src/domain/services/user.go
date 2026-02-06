@@ -1,23 +1,23 @@
 package services
 
 import (
-    "svc-pdb/src/data/database"
-    "svc-pdb/src/data/models"
-    "golang.org/x/crypto/bcrypt"
+	"golang.org/x/crypto/bcrypt"
+	"srvc-account/src/data/database"
+	"srvc-account/src/data/models"
 )
 
 func RegisterUser(username, email, password string) (*models.User, error) {
-    hashedPassword, _ := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	hashedPassword, _ := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 
-    user := &models.User{
-        Username:     username,
-        Email:        email,
-        PasswordHash: string(hashedPassword),
-    }
+	user := &models.User{
+		Username:     username,
+		Email:        email,
+		PasswordHash: string(hashedPassword),
+	}
 
-    if err := database.DB.Create(user).Error; err != nil {
-        return nil, err
-    }
+	if err := database.DB.Create(user).Error; err != nil {
+		return nil, err
+	}
 
-    return user, nil
+	return user, nil
 }

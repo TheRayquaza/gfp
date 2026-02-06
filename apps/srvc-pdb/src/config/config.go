@@ -5,7 +5,7 @@ import (
 )
 
 type Config struct {
-	RedisAddr string
+	RedisAddr  string
 	ServerPort string
 }
 

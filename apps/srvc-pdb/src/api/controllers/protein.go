@@ -1,10 +1,11 @@
 package controllers
 
 import (
-	"net/http"
-	"back/src/data/models"
-	"back/src/domain/services"
+	"srvc-pdb/src/data/models"
+	"srvc-pdb/src/domain/services"
+
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 var proteinService = &services.ProteinService{}

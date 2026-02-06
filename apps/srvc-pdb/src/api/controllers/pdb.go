@@ -1,9 +1,9 @@
 package controllers
 
 import (
-	"net/http"
-	"back/src/domain/services"
 	"github.com/gin-gonic/gin"
+	"net/http"
+	"srvc-pdb/src/domain/services"
 )
 
 var pdbService = &services.PDBService{}
