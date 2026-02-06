@@ -5,6 +5,8 @@ resource "aws_subnet" "gfp-cluster-workers" {
   cidr_block        = element(["10.0.3.0/24", "10.0.4.0/24"], count.index)
   availability_zone = element(["${var.region}a", "${var.region}b"], count.index)
 
+  map_public_ip_on_launch = true # assign public IPs to instances launched in this subnet
+
   tags = {
     Name = "eks-gfp-cluster-${count.index + 1}"
   }

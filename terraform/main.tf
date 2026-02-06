@@ -30,7 +30,7 @@ module "eks" {
   vpc_id = aws_vpc.main.id
   redis_endpoint = module.cache.redis_endpoint
   igw_id = aws_internet_gateway.igw.id
-
+  local_workstation_cidr = var.local_workstation_cidr
 
   depends_on = [ aws_vpc.main ]
 }

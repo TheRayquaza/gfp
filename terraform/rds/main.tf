@@ -1,7 +1,7 @@
 resource "aws_db_instance" "gfp_rds" {
   allocated_storage    = 20
   engine               = "postgres"
-  db_name              = "geoipstats"
+  db_name              = "gfpdb"
   instance_class       = "db.t3.micro"
   username             = "myusername"
   password             = "yoursecurepassword"

@@ -26,3 +26,8 @@ variable "cloudflare_zone_id" {
   description = "Cloudflare Zone ID"
   type        = string
 }
+
+variable "local_workstation_cidr" {
+  description = "CIDR block for local workstation access"
+  type        = string
+}

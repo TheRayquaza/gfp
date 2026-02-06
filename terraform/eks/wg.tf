@@ -47,6 +47,7 @@ resource "aws_eks_node_group" "gfp" {
 
   remote_access {
     ec2_ssh_key = "my-key"
+    source_security_group_ids = [aws_security_group.eks_ssh_access.id]
   }
 
   depends_on = [

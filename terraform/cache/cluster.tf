@@ -10,4 +10,9 @@ resource "aws_elasticache_cluster" "gfp_cache" {
   lifecycle {
     create_before_destroy = true
   }
+
+  timeouts {
+    create = "10m"
+    delete = "10m"
+  }
 }

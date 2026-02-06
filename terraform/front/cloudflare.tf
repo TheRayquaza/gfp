@@ -9,9 +9,9 @@ resource "cloudflare_dns_record" "validation" {
 
   zone_id = var.cloudflare_zone_id
   name    = replace(each.value.name, "/\\.$/", "")
-  content   = each.value.record
+  content = trimsuffix(each.value.record, ".")
   type    = each.value.type
-  proxied = true
+  proxied = false
   ttl     = 60
 }
 
