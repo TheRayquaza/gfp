@@ -21,3 +21,6 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
+        envFrom:
+        - configMapRef:
+            name: srvc-pdb-config

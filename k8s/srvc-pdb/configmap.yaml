@@ -4,6 +4,7 @@ metadata:
   name: srvc-pdb-config
   namespace: srvc-pdb
 data:
-  APP_HOST: "0.0.0.0"
-  APP_PORT: "8080"
-  
+  SERVER_HOST: "0.0.0.0"
+  SERVER_PORT: "8080"
+
+  REDIS_ADDR: "gfp-cache.dpqsci.0001.euw3.cache.amazonaws.com:6379"

@@ -7,8 +7,6 @@ data:
   SERVER_HOST: "0.0.0.0"
   SERVER_PORT: "8080"
 
-  DB_HOST: "xxx"
+  DB_HOST: "terraform-20260206110325466300000001.cdcok2iygmhu.eu-west-3.rds.amazonaws.com"
   DB_PORT: "5432"
-  DB_NAME: "xxx"
-
-  JWT_SECRET: "xxx"
+  DB_NAME: "gfpdb"
