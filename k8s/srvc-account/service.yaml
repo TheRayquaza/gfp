@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: srvc-account
+  namespace: srvc-account
+  labels:
+    app: srvc-account
+spec:
+  selector:
+    app: srvc-account
+  ports: 
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+  type: ClusterIP

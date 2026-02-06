@@ -1,0 +1,23 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: srvc-pdb
+  namespace: srvc-pdb
+  labels:
+    app: srvc-pdb
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: srvc-pdb
+  template:
+    metadata:
+      labels:
+        app: srvc-pdb
+    spec:
+      containers:
+      - name: srvc-pdb
+        image: ghcr.io/TheRayquaza/aws-training/srvc-pdb:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080

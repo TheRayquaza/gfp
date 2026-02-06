@@ -1,0 +1,23 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: srvc-account
+  namespace: srvc-account
+  labels:
+    app: srvc-account
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: srvc-account
+  template:
+    metadata:
+      labels:
+        app: srvc-account
+    spec:
+      containers:
+      - name: srvc-account
+        image: ghcr.io/TheRayquaza/aws-training/srvc-account:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080

@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: protein-api
+    ports:
+      - "8080:8080"
+    environment:
+      - POSTGRES_DB_HOST=postgres
+      - POSTGRES_DB_PORT=5432
+      - POSTGRES_DB_USER=proteinuser
+      - POSTGRES_DB_PASSWORD=proteinpass
+      - MINIO_ENDPOINT=minio:9000
+      - MINIO_ACCESS_KEY=minioadmin
+      - MINIO_SECRET_KEY=minioadmin
+      - SERVER_PORT=8080
+      - APP_HOST=localhost
+      - GIN_MODE=release
+    depends_on:
+      postgres:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    networks:
+      - protein-network
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: protein-postgres
+    environment:
+      - POSTGRES_USER=proteinuser
+      - POSTGRES_PASSWORD=proteinpass
+      - POSTGRES_DB=proteindb
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U proteinuser"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - protein-network
+
+  minio:
+    image: minio/minio:latest
+    container_name: protein-minio
+    environment:
+      - MINIO_ROOT_USER=minioadmin
+      - MINIO_ROOT_PASSWORD=minioadmin
+    healthcheck:
+      test: ["CMD", "mc", "alias", "set", "local", "http://localhost:9000", "minioadmin", "minioadmin"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    command: server /data --console-address ":9001"
+    networks:
+      - protein-network
+
+volumes:
+  pgdata:
+
+networks:
+  protein-network:
+    driver: bridge

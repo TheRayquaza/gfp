@@ -1,0 +1,57 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: srvc-account-ingress
+  namespace: srvc-account
+  annotations:
+    alb.ingress.kubernetes.io/group.name: "gfp-alb-group"
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:REGION:ACCOUNT:certificate/ID
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
+
+    alb.ingress.kubernetes.io/security-groups: sg-0f95ca74af277067d
+
+    alb.ingress.kubernetes.io/conditions.srvc-account: >
+      [{"field":"http-header","httpHeaderConfig":{"headerName": "X-Custom-Header", "values":["${CUSTOM_HEADER_TOKEN}"]}}]
+spec:
+  ingressClassName: alb
+  rules:
+    - http:
+        paths:
+          - path: /api/account/*
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: srvc-account
+                port:
+                  number: 80
+    - http:
+        paths:
+          - path: /api/login/*
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: srvc-account
+                port:
+                  number: 80
+    - http:
+        paths:
+          - path: /api/register/*
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: srvc-account
+                port:
+                  number: 80
+    - http:
+        paths:
+          - path: /api/logout/*
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: srvc-account
+                port:
+                  number: 80

@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: srvc-pdb-ingress
+  namespace: srvc-pdb
+  annotations:
+    alb.ingress.kubernetes.io/group.name: "srvc-pdb-alb-group"
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    
+    alb.ingress.kubernetes.io/conditions.molecules-service: >
+      [{"field":"http-header","httpHeaderConfig":{"headerName": "X-Custom-Header", "values":["${CUSTOM_HEADER_TOKEN}"]}}]
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /api/pdb/*
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: srvc-pdb
+                port:
+                  number: 80

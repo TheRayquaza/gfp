@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: srvc-pdb
+  namespace: srvc-pdb
+  labels:
+    app: srvc-pdb
+spec:
+  selector:
+    app: srvc-pdb
+  ports: 
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+  type: ClusterIP
