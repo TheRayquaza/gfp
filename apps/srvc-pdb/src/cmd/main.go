@@ -10,7 +10,6 @@ import (
 func main() {
 	cfg := config.LoadConfig()
 
-	// Connect to Redis
 	if err := database.InitRedis(cfg.RedisAddr); err != nil {
 		log.Fatalf("Fatal: Could not connect to Redis at %s: %v", cfg.RedisAddr, err)
 	}
@@ -18,8 +17,8 @@ func main() {
 
 	r := api.SetupRouter()
 
-	log.Printf("Server starting on port %s", cfg.ServerPort)
-	if err := r.Run(":" + cfg.ServerPort); err != nil {
+	log.Printf("Server starting on host %s and port %s", cfg.ServerHost, cfg.ServerPort)
+	if err := r.Run(cfg.ServerHost + ":" + cfg.ServerPort); err != nil {
 		log.Fatal(err)
 	}
 }

@@ -4,11 +4,10 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
 	"net/http"
-	"os"
 	"strings"
 )
 
-func AuthRequired() gin.HandlerFunc {
+func AuthRequired(jwtSecret string) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		authHeader := c.GetHeader("Authorization")
 		if authHeader == "" {
@@ -18,7 +17,7 @@ func AuthRequired() gin.HandlerFunc {
 
 		tokenString := strings.TrimPrefix(authHeader, "Bearer ")
 		token, _ := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
-			return []byte(os.Getenv("JWT_SECRET")), nil
+			return []byte(jwtSecret), nil
 		})
 
 		if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {

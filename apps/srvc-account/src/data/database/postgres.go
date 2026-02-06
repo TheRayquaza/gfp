@@ -2,19 +2,19 @@ package database
 
 import (
 	"fmt"
-	"log"
-	"os"
-	"srvc-account/src/data/models"
-
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"log"
+
+	"srvc-account/src/config"
+	"srvc-account/src/data/models"
 )
 
 var DB *gorm.DB
 
-func InitDB() {
+func InitDB(config *config.Config) {
 	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable",
-		os.Getenv("DB_HOST"), os.Getenv("DB_USER"), os.Getenv("DB_PASSWORD"), os.Getenv("DB_NAME"), os.Getenv("DB_PORT"))
+		config.DBHost, config.DBUser, config.DBPassword, config.DBName, config.DBPort)
 
 	var err error
 	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
