@@ -4,6 +4,14 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}/srvc-account
 
+on:
+  push:
+    branches: ["**"]
+    paths:
+      - 'apps/srvc-account/**'
+    tags:
+      - 'srvc-account-v*.*.*'
+
 jobs:
   lint:
     if: github.event_name == 'push'

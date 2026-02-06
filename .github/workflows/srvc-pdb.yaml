@@ -4,6 +4,15 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}/srvc-pdb
 
+
+on:
+  push:
+    branches: ["**"]
+    paths:
+      - 'apps/srvc-pdb/**'
+    tags:
+      - 'srvc-pdb-v*.*.*'
+
 jobs:
   lint:
     if: github.event_name == 'push'
