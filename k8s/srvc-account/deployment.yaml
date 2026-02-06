@@ -6,7 +6,7 @@ metadata:
   labels:
     app: srvc-account
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: srvc-account
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: srvc-account
-        image: ghcr.io/TheRayquaza/aws-training/srvc-account:latest
+        image: ghcr.io/therayquaza/gfp/srvc-account:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
