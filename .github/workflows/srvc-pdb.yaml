@@ -4,6 +4,15 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}/srvc-pdb
 
+
+on:
+  push:
+    branches: ["**"]
+    paths:
+      - 'apps/srvc-pdb/**'
+    tags:
+      - 'srvc-pdb-v*.*.*'
+
 jobs:
   lint:
     if: github.event_name == 'push'
@@ -65,9 +74,10 @@ jobs:
             type=sha
       - id: build-and-push
         uses: docker/build-push-action@v5
+        
         with:
           context: apps/srvc-pdb
-          file: Dockerfile
+          file: apps/srvc-pdb/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}

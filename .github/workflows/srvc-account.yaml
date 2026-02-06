@@ -4,6 +4,14 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}/srvc-account
 
+on:
+  push:
+    branches: ["**"]
+    paths:
+      - 'apps/srvc-account/**'
+    tags:
+      - 'srvc-account-v*.*.*'
+
 jobs:
   lint:
     if: github.event_name == 'push'
@@ -67,7 +75,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: apps/srvc-account
-          file: Dockerfile
+          file: apps/srvc-account/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
